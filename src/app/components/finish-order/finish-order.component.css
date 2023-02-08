@@ -1,0 +1,16 @@
+.finish-page {
+  max-width: 1200px;
+  margin-inline: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.finish-page>* {
+  flex: 0 0 100%;
+  text-align: center;
+}
+
+.finish-page .btn {
+  flex: 0 0 30%;
+}

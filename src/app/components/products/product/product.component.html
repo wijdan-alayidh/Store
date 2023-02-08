@@ -1,0 +1,45 @@
+<div class="Product">
+  <div class="product-image">
+    <img src="{{product.url}}" alt="{{ product.name }}"></div>
+  <div class="product-details">
+    <h3 class="product-details--name"> {{product.name }}</h3>
+    <p class="product--details--price"> {{ product.price }} $ </p>
+  </div>
+  <div *ngIf="productAvailable();else elseBlock" class="product-order">
+    <div class="quantity">
+      <div *ngIf="maxItems();else elseBlockProducts">
+        <div class="product-order--btns">
+          <button (click)="upQuantity(product)">+</button>
+          <input type="text" value="{{ totalItems }}" readonly>
+          <button *ngIf="this.totalItems > 0;else minusBlock" (click)="downQuantity(product)">-</button>
+        </div>
+        <ng-template #minusBlock>
+          <button *ngIf="this.totalItems == 0" (click)="downQuantity(product)" disabled>-</button>
+        </ng-template>
+      </div>
+      <ng-template class="error-message" #elseBlockProducts>
+        <p class="error-message">This is the max items you can order.</p>
+        <div class="product-order--btns">
+          <button (click)="upQuantity(product)" disabled>+</button>
+          <input type="text" value="{{ totalItems }}" readonly>
+          <button (click)="downQuantity(product)">-</button>
+        </div>
+      </ng-template>
+    </div>
+    <!-- order button -->
+    <div class="cta">
+      <button type="button" class="btn btn-primary" (click)="add(product)">add to cart</button>
+      <a [routerLink]="['/product-detail/', product.id]" class="show-details">
+        <span> show details</span>
+        <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+  <ng-template class="error-message" #elseBlock>
+    <p class="error-message">
+      This Product not available.
+    </p>
+  </ng-template>
+  <!-- <button (click)="hide(product)">remove</button> -->
+</div>

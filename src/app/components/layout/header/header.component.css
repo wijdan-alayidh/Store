@@ -1,0 +1,16 @@
+:host {
+  background-color: #60BEEB;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  padding-block: 30px;
+  padding-inline: 30px;
+  color: white;
+  text-align: center;
+  margin-block-end: 100px;
+}
+
+:host .Site-name {
+  flex: 0 0 100%;
+}

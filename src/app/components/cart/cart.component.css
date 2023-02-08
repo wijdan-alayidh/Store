@@ -1,0 +1,45 @@
+.Cart {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.Cart>div {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  column-gap: 5%;
+}
+
+.Cart-list {
+  flex: 0 0 55%;
+  display: flex;
+  flex-flow: row wrap;
+  row-gap: 30px;
+}
+
+.cart-product {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  flex: 0 0 100%;
+  column-gap: 50px;
+  align-items: center;
+  border-block-end: 1px solid rgba(128, 128, 128, 0.333);
+  padding-block-end: 30px;
+}
+
+img.product-image {
+  width: 100px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-block: 30px;
+  flex: 0 0 100%;
+
+}

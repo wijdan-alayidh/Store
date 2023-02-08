@@ -1,0 +1,27 @@
+<div class="Cart">
+  <div *ngIf="cartList.length != 0; else elseBlock">
+    <div class="Cart-list">
+
+      <div class="cart-product" *ngFor="let product of cartList">
+        <img src="{{product.url}}" alt="" class="product-image">
+        <div class="details">
+          <p class="name"> {{product.name}}</p>
+          <p class="price"> {{product.price}} $</p>
+          <p class="amount"> Amount : {{product.orderItems}} </p>
+        </div>
+      </div>
+
+    </div>
+
+    <app-create-order></app-create-order>
+    <div class="total"> Total: {{ total }}</div>
+
+    <button (click)="clearCart()" class="btn btn-danger">clear the cart</button>
+  </div>
+
+  <ng-template class="error-message" #elseBlock>
+    <p class="error-message">
+      No products have been added to the cart yet
+    </p>
+  </ng-template>
+</div>

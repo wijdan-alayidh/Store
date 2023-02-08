@@ -1,0 +1,14 @@
+:host {
+  flex: 0 0 40%;
+}
+
+.cart-form .form-control {
+  border: none;
+  padding-block: 15px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.cart-form .form-control>* {
+  flex: 0 0 100%;
+}

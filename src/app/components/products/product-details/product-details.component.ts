@@ -12,7 +12,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product;
-  product_id: string;
+  product_id: Number;
   products: Product[] = [];
 
   totalItems = 0;
@@ -23,19 +23,33 @@ export class ProductDetailsComponent implements OnInit {
     private location: Location,
     private cartService: CartService
   ) {
-    this.product_id = this.route.snapshot.params['id'];
-    this.product = this.route.snapshot.params['product'];
+    this.product = {
+      id: 0,
+      name: '',
+      price: 0,
+      url: '',
+      description: '',
+      quantity: 0,
+      orderItems: 0,
+    };
   }
 
   ngOnInit(): void {
-    this.getProductDetails();
+    this.route.paramMap.subscribe((params) => {
+      this.product_id = Number(params.get('id'));
+    });
+    if (this.product_id) {
+      this.productService.getProducts().subscribe((res) => {
+        this.products = res;
+        this.product = this.getProductDetail(this.product_id);
+      });
+    }
   }
-  getProductDetails(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.productService
-      .getProduct(id)
-      .subscribe((product) => (this.product = product));
+
+  getProductDetail(id: Number) {
+    return this.products.filter((p) => p.id === id)[0];
   }
+
   goBack(): void {
     this.location.back();
   }

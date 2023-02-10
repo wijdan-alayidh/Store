@@ -9,6 +9,8 @@
           <p class="price"> {{product.price}} $</p>
           <p class="amount"> Amount : {{product.orderItems}} </p>
         </div>
+
+        <button (click)="removeItem(this.product)" class="btn btn-danger">Remove</button>
       </div>
 
     </div>

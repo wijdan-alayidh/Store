@@ -10,11 +10,9 @@ import { Router } from '@angular/router';
 })
 export class FinishOrderComponent implements OnInit {
   name: string;
-  total: number;
 
   constructor(private route: ActivatedRoute, private location: Location) {
     this.name = '';
-    this.total = 0;
   }
   ngOnInit(): void {
     this.name = String(this.route.snapshot.paramMap.get('name'));

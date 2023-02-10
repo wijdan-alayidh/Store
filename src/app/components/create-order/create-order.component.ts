@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
+import { Validator, Form } from '@angular/forms';
 
 @Component({
   selector: 'app-create-order',
@@ -10,8 +11,9 @@ import { CartService } from 'src/app/services/cart.service';
 export class CreateOrderComponent implements OnInit {
   name: string = '';
   address: string = '';
-  card: number = 0;
+  card: number;
   total: number = 0;
+  sendOrder: boolean = false;
 
   @Output() createOrder: EventEmitter<any> = new EventEmitter();
 
@@ -28,6 +30,11 @@ export class CreateOrderComponent implements OnInit {
 
     this.createOrder.emit(order);
     this.router.navigate(['/order', order]);
+
+    this.name = '';
+    this.address = '';
+    this.card = 0;
+
     this.cartService.clearCart();
   }
 }

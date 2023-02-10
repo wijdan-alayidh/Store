@@ -17,8 +17,10 @@ export class ProductsListComponent implements OnInit {
     private productService: ProductsService,
     private cartService: CartService
   ) {}
-  ngOnInit(): void {
-    this.products = this.productService.getProducts();
+  ngOnInit() {
+    return this.productService.getProducts().subscribe((res) => {
+      this.products = res;
+    });
   }
   hideProduct(product: Product): void {
     this.products = this.products.filter((p) => p.id !== product.id);

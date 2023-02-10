@@ -12,3 +12,9 @@
 .cart-form .form-control>* {
   flex: 0 0 100%;
 }
+
+.alert {
+  color: red;
+  font-weight: 500;
+  font-size: 12px;
+}

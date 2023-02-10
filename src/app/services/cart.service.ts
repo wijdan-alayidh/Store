@@ -6,9 +6,20 @@ import { Product } from '../models/Product';
 })
 export class CartService {
   cartList: Product[] = [];
+  product: Product;
   public total: number = 0;
 
-  constructor() {}
+  constructor() {
+    this.product = {
+      id: 0,
+      name: '',
+      price: 0,
+      url: '',
+      description: '',
+      quantity: 0,
+      orderItems: 0,
+    };
+  }
 
   // Get the Products added to the cart function
   getCartProducts() {

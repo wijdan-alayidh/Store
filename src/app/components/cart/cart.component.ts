@@ -32,4 +32,12 @@ export class CartComponent implements OnInit {
       alert('cleared');
     }, 100);
   }
+
+  // Remove Product
+  removeItem(product: Product) {
+    this.cartList = this.cartList.filter((p) => p.id !== product.id);
+    setTimeout(() => {
+      alert('Product Removed');
+    }, 100);
+  }
 }

@@ -1,19 +1,69 @@
 <form #form="ngForm" class="cart-form" (ngSubmit)="submitForm()">
   <div class="form-control">
     <label for="name">Full Name</label>
-    <input type="text" name="name" id="name" required minlength="3" appForbiddenName="name"
-      placeholder="(minimum 3 characters)" [(ngModel)]="name">
+    <input type="text" id="name" name="name" required minlength="3" appForbiddenName="name"
+      placeholder="(minimum 3 characters)" [(ngModel)]="name" pattern="[a-zA-Z ]*" #Name="ngModel">
   </div>
+
+  <!-- Validate name input messages -->
+  <div *ngIf="Name.invalid && (Name.dirty || Name.touched)" class="alert">
+    <div *ngIf="Name.errors?.['required']">
+      Name is required.
+    </div>
+    <div *ngIf="Name.errors?.['minlength']">
+      Name must be at least 3 characters long.
+    </div>
+    <div *ngIf="Name.errors?.['pattern']">
+      Name cannot contains numbers.
+    </div>
+  </div>
+
   <div class="form-control">
     <label for="address">Address</label>
     <input type="text" name="address" id="address" required minlength="6" appForbiddenName="address"
-      placeholder="(minimum 6 characters)" [(ngModel)]="address">
+      placeholder="(minimum 6 characters)" [(ngModel)]="address" #Address="ngModel">
   </div>
+
+  <!-- Validate address input messages -->
+  <div *ngIf="Address.invalid && (Address.dirty || Address.touched)" class="alert">
+    <div *ngIf="Address.errors?.['required']">
+      Address is required.
+    </div>
+    <div *ngIf="Address.errors?.['minlength']">
+      Address must be at least 6 characters long.
+    </div>
+  </div>
+
   <div class="form-control">
     <label for="card">Credit card number</label>
-    <input type="text" name="card" id="card" required minlength="16" maxlength="16" appForbiddenName="card"
-      placeholder="(16-digit number)" [(ngModel)]="card">
+    <input type="text" name="card" id="card" required minlength="16" pattern="^[0-9]*$" maxlength="16"
+      appForbiddenName="card" placeholder="(16-digit number)" [(ngModel)]="card" #Card="ngModel">
     <p class="info">We'll never share your payment details with anyone else.</p>
+  </div>
+
+  <!-- Validate address input messages -->
+  <div *ngIf="Card.invalid && (Card.dirty || Card.touched)" class="alert">
+    <div *ngIf="Card.errors?.['required']">
+      Card is required.
+    </div>
+    <div *ngIf="Card.errors?.['minlength']">
+      Card must be at least 16 characters long.
+    </div>
+    <div *ngIf="Card.errors?.['pattern']">
+      Card cannot contains letters.
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="sendOrder">Send The order</label>
+    <input type="checkbox" name="sendOrder" id="sendOrder" required [(ngModel)]="sendOrder" #SendOrder="ngModel"
+      (change)="sendOrder == true">
+  </div>
+  <!-- Validate send order input messages -->
+  <div *ngIf="SendOrder.invalid && (SendOrder.dirty || SendOrder.touched || sendOrder == false)" class="alert">
+    <div *ngIf="SendOrder.errors?.['required']">
+      Check send order is required.
+    </div>
   </div>
 
   <input type="submit" [disabled]="form.invalid" class="btn btn-primary">

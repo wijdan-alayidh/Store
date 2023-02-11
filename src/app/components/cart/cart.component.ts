@@ -12,9 +12,16 @@ export class CartComponent implements OnInit {
 
   total: number = 0;
   itemTotal: number = 0;
+  item: Number;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) {
+    this.cartList = [];
+  }
   ngOnInit(): void {
+    this.getCarListItems();
+  }
+
+  getCarListItems(): Product[] {
     this.cartList = this.cartService.getCartProducts();
 
     for (let item of this.cartList) {
@@ -24,7 +31,10 @@ export class CartComponent implements OnInit {
 
     this.total = Number(this.total.toFixed(2));
     this.cartService.total = this.total;
+
+    return this.cartList;
   }
+
   clearCart(): void {
     this.cartList = [];
     this.cartService.clearCart();
@@ -34,10 +44,19 @@ export class CartComponent implements OnInit {
   }
 
   // Remove Product
-  removeItem(product: Product) {
-    this.cartList = this.cartList.filter((p) => p.id !== product.id);
+  removeItem(product: Product): Product[] {
+    this.total = Number(
+      (this.total - product.orderItems * product.price).toFixed(2)
+    );
+
+    this.item = this.cartList.indexOf(product);
+    console.log(this.item);
+    this.cartList = this.cartList.splice(Number(this.item), 1);
+
     setTimeout(() => {
       alert('Product Removed');
     }, 100);
+
+    return this.cartList;
   }
 }

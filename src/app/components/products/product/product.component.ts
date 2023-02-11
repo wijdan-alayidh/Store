@@ -76,6 +76,10 @@ export class ProductComponent implements OnInit {
   }
   // add Product
   add(product: Product): void {
-    this.addToCart.emit(product);
+    if (product.orderItems == 0) {
+      alert('Please select the number of items.');
+    } else {
+      this.addToCart.emit(product);
+    }
   }
 }

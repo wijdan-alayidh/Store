@@ -13,13 +13,25 @@ export class CreateOrderComponent implements OnInit {
   address: string = '';
   card: number;
   total: number = 0;
-  sendOrder: boolean = false;
+  max: number;
+  min: number;
+  errorMessage: string;
+
+  inputName: string;
 
   @Output() createOrder: EventEmitter<any> = new EventEmitter();
 
   constructor(private router: Router, public cartService: CartService) {}
   ngOnInit(): void {}
-
+  validateNumberOfInputs(min: number, max: number): void {
+    if (this.name.length < min) {
+      this.errorMessage = `The minimum number of characters must be ${min}`;
+    } else if (this.name.length > max) {
+      this.errorMessage = `The maximum number of characters must be ${max}`;
+    } else {
+      this.errorMessage = '';
+    }
+  }
   submitForm(): void {
     const order = {
       name: this.name,

@@ -2,16 +2,18 @@
   <div class="form-control">
     <label for="name">Full Name</label>
     <input type="text" id="name" name="name" required minlength="3" appForbiddenName="name"
-      placeholder="(minimum 3 characters)" [(ngModel)]="name" pattern="[a-zA-Z ]*" #Name="ngModel">
+      placeholder="(minimum 3 characters)" [(ngModel)]="name" pattern="[a-zA-Z ]*" #Name="ngModel"
+      (ngModelChange)="validateNumberOfInputs( 3, 16)">
   </div>
 
+
   <!-- Validate name input messages -->
+  <div *ngIf="errorMessage" class="alert">
+    <div> {{ errorMessage }} </div>
+  </div>
   <div *ngIf="Name.invalid && (Name.dirty || Name.touched)" class="alert">
     <div *ngIf="Name.errors?.['required']">
       Name is required.
-    </div>
-    <div *ngIf="Name.errors?.['minlength']">
-      Name must be at least 3 characters long.
     </div>
     <div *ngIf="Name.errors?.['pattern']">
       Name cannot contains numbers.
@@ -51,18 +53,6 @@
     </div>
     <div *ngIf="Card.errors?.['pattern']">
       Card cannot contains letters.
-    </div>
-  </div>
-
-  <div class="form-control">
-    <label for="sendOrder">Send The order</label>
-    <input type="checkbox" name="sendOrder" id="sendOrder" required [(ngModel)]="sendOrder" #SendOrder="ngModel"
-      (change)="sendOrder == true">
-  </div>
-  <!-- Validate send order input messages -->
-  <div *ngIf="SendOrder.invalid && (SendOrder.dirty || SendOrder.touched || sendOrder == false)" class="alert">
-    <div *ngIf="SendOrder.errors?.['required']">
-      Check send order is required.
     </div>
   </div>
 
